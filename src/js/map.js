@@ -21,10 +21,11 @@ function createCircles(data, parameter =  'TotalConfirmed') {
 		var circle = L.circle(coordinates[`${sortedData[i][0]}`].reverse(), {
 			color: 'red',
 			fillColor: '#f03',
-			fillOpacity: 0.9,
+			fillOpacity: 0.7,
 			radius: 10000 + sortedData[i][1]*300000/10000000
 	}).addTo(mymap);
 	circle.bindPopup(`<b>${sortedData[i][0]}</b><br>${sortedData[i][1].toLocaleString('en')} cases`);
+	circle.addEventListener('mouseenter', circle.openPopup);
 	}
 }
 

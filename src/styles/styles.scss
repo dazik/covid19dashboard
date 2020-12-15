@@ -6,7 +6,7 @@
 	height: 500px;
 }
 
-#countryTable table {
+#countryTable {
 	max-height: 500px;
-	overflow: scroll;
+	overflow-x: auto;
 }

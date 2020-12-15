@@ -1,3 +1,34 @@
-h3 {
-    color: red;
+// @import "../node_modules/bootstrap/scss/bootstrap";
+
+.header {
+    height: 100px;
+    background-color: skyblue;
+}
+
+.footer {
+    height: 50px;
+    background-color: skyblue;
+}
+
+
+#main {
+    background-color: royalblue;
+    // minus height of header and footer
+    height: calc(100vh - 150px);
+    >.row {
+      height: 100%;  
+    }
+}
+
+#left {
+    background-color: yellow;
+    height: 100%;
+}
+
+#middle {
+    background-color: green;
+}
+
+#right {
+    background-color: red;
 }

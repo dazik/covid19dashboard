@@ -1,3 +1,6 @@
+// import script for bootstrap
+import '../node_modules/bootstrap/dist/js/bootstrap.bundle';
+
 import './styles/styles.scss';
 import initMap from './js/map';
 import {generateMainTable, generateCountryTable} from './js/blocks'
@@ -32,3 +35,7 @@ function init() {
 window.addEventListener('DOMContentLoaded', function() {
     init();
 })
+console.log('it works!');
+
+
+

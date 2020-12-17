@@ -1,7 +1,6 @@
 let populationCoefficient;
 const mainTableContainer = document.querySelector('#mainTable');
 const countryTableContainer = document.querySelector('#countryTable');
-import coordinates from './coordinates'
 //Generate main table
 function generateMainTable(data) {
   const table = document.createElement('table')
@@ -23,10 +22,11 @@ function generateMainTable(data) {
 }
 
 //Generate country table
-function generateCountryTable(data) {
+function generateCountryTable(data, parameter = "TotalConfirmed") {
+	console.log(data);
   const table = document.createElement('table')
   const tbody = document.createElement('tbody');
-  const sortedData = sortData(data, 'TotalConfirmed');
+  const sortedData = sortData(data, parameter);
   for(let i = 0; i < sortedData.length; i++) {
     tbody.innerHTML += `<tr><th  scope="row">${sortedData[i][0]}</th><td>${sortedData[i][1].toLocaleString('en', { maximumFractionDigits: 0 })}</td></tr>`
 	}

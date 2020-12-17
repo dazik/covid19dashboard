@@ -1,6 +1,9 @@
+import {initMap, removeMap} from "./map";
+
 let populationCoefficient;
 const mainTableContainer = document.querySelector('#mainTable');
 const countryTableContainer = document.querySelector('#countryTable');
+const mapContainer = document.querySelector('#mapid');
 let activeCategoryId = 0;
 const categories = {
 	TotalConfirmed: 'Total cases',
@@ -92,6 +95,8 @@ function chooseCategory(categoryId, data) {
 	console.log(catArr[categoryId][0]);
 	activeCategoryId = categoryId;
 	generateCountryTable(data, catArr[categoryId][0]);
+	removeMap();
+	initMap(data, catArr[categoryId][0]);
 }
 
 //Sort by parameter function

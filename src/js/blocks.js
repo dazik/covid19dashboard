@@ -1,10 +1,26 @@
+import {initMap, removeMap} from "./map";
+
 let populationCoefficient;
 const mainTableContainer = document.querySelector('#mainTable');
 const countryTableContainer = document.querySelector('#countryTable');
-import coordinates from './coordinates'
+const mapContainer = document.querySelector('#mapid');
+let activeCategoryId = 0;
+const categories = {
+	TotalConfirmed: 'Total cases',
+	TotalDeaths: 'Total deaths',
+	TotalRecovered: 'Total Recovered',
+	NewConfirmed: 'New cases',
+	NewDeaths: 'New deaths',
+	NewRecovered: 'New Recovered',
+}
+const catArr = Object.entries(categories);
+let activeCountry = null;
+
 //Generate main table
 function generateMainTable(data) {
-  const table = document.createElement('table')
+	const cardBody = document.createElement('div');
+	cardBody.classList.add('card-body');
+  const table = document.createElement('table');
   const tbody = document.createElement('tbody');
   tbody.innerHTML = `<tr><th  scope="row">Total infected:</th><td>${data['TotalConfirmed'].toLocaleString('en', { maximumFractionDigits: 0 })}</td></tr>
   <tr><th  scope="row">Total deaths:</th><td>${data['TotalDeaths'].toLocaleString('en', { maximumFractionDigits: 0 })}</td></tr>
@@ -19,19 +35,68 @@ function generateMainTable(data) {
   <tr><th  scope="row">New deaths per 100 000:</th><td>${parseInt(data['NewDeaths']/populationCoefficient)}</td></tr>
   <tr><th  scope="row">New recovered per 100 000:</th><td>${parseInt(data['NewRecovered']/populationCoefficient)}</td></tr>`;
   table.appendChild(tbody);
-  mainTableContainer.appendChild(table);
+	cardBody.appendChild(table);
+	mainTableContainer.appendChild(cardBody);
 }
 
 //Generate country table
-function generateCountryTable(data) {
-  const table = document.createElement('table')
+function generateCountryTable(data, parameter = "TotalConfirmed") {
+	countryTableContainer.innerHTML = '';
+	const cardBody = document.createElement('div');
+	cardBody.classList.add('card-body');
+	const cardHeader = document.createElement('div');
+	cardHeader.classList.add('card-body');
+	generateDropdowns(cardHeader, data);
+  const table = document.createElement('table');
   const tbody = document.createElement('tbody');
-  const sortedData = sortData(data, 'TotalConfirmed');
+  const sortedData = sortData(data, parameter);
   for(let i = 0; i < sortedData.length; i++) {
     tbody.innerHTML += `<tr><th  scope="row">${sortedData[i][0]}</th><td>${sortedData[i][1].toLocaleString('en', { maximumFractionDigits: 0 })}</td></tr>`
 	}
-  table.appendChild(tbody);
-  countryTableContainer.appendChild(table);
+	table.appendChild(tbody);
+	cardBody.appendChild(table);
+	countryTableContainer.appendChild(cardHeader);
+  countryTableContainer.appendChild(cardBody);
+}
+//Add dropdowns to countries block
+function generateDropdowns(block, data) {	
+	console.log(catArr);
+	const dropdownContainer = document.createElement('div');
+	dropdownContainer.classList.add('dropdown');
+	const ddButton = document.createElement('button');
+	ddButton.classList.add('btn', 'btn-secondary', 'dropdown-toggle');
+	ddButton.id = 'categoryDropdown';
+	ddButton.setAttribute('data-bs-toggle', 'dropdown');
+	ddButton.setAttribute('aria-expanded', 'false');
+	ddButton.innerText = catArr[activeCategoryId][1];
+	const ddList = document.createElement('ul');
+	ddList.classList.add('dropdown-menu');
+	ddList.setAttribute('aria-labelledby', 'categoryDropdown');
+	for (let i = 0; i < catArr.length; i += 1) {
+		const ddItem = document.createElement('li');
+		const ddItemButton = document.createElement('button');
+		ddItemButton.id = i;
+		ddItemButton.classList.add('dropdown-item');
+		ddItemButton.setAttribute('type', 'button');
+		ddItemButton.innerText = catArr[i][1];
+		ddItemButton.addEventListener('click', function() {
+			chooseCategory(i, data);
+		});
+		ddItem.appendChild(ddItemButton);
+		ddList.appendChild(ddItem);
+	}
+	dropdownContainer.appendChild(ddButton);
+	dropdownContainer.appendChild(ddList);
+	block.appendChild(dropdownContainer);
+}
+
+//Choose category
+function chooseCategory(categoryId, data) {
+	console.log(catArr[categoryId][0]);
+	activeCategoryId = categoryId;
+	generateCountryTable(data, catArr[categoryId][0]);
+	removeMap();
+	initMap(data, catArr[categoryId][0]);
 }
 
 //Sort by parameter function
@@ -45,6 +110,8 @@ function sortData(data, parameter) {
   })
   return sortedData;
 }
+
+
 
 
 //Calculating the coefficient that shows cases per 100.000 people

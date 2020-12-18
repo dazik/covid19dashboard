@@ -2,7 +2,7 @@
 import '../node_modules/bootstrap/dist/js/bootstrap.bundle';
 
 import './styles/styles.scss';
-import initMap from './js/map';
+import {initMap} from './js/map';
 import {generateMainTable, generateCountryTable} from './js/blocks'
 const url = 'https://api.covid19api.com/summary'
 let data;
@@ -23,7 +23,7 @@ async function loadData(url) {
 function generateIndexPage(data) {
   generateMainTable(data.Global);
 	generateCountryTable(data.Countries);
-	initMap(data);
+	initMap(data.Countries);
 }
 
 

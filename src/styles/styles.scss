@@ -1,20 +1,8 @@
-* {
-	transition: 0.3s;
-}
-
-#mapid {
-	height: 500px;
-}
-
-#countryTable table {
-	max-height: 500px;
-    overflow: scroll;
-}
-
 $color-primary: rgb(53, 53, 53);
 $body-bg:  rgb(24, 24, 24);
 $color-title: #00C3B3;
 $color-map: #D5BCA2;
+$color-text-light: #ddd;
 
 
 body {
@@ -44,22 +32,24 @@ body {
     }
 }
 
-#left {
+.left {
     background-color: $color-primary;
-    height: 100%;
+		height: 100%;
+		color: $color-text-light
 }
 
-#middle {
+.middle {
     background-color: $color-primary;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding: 5px;
+		padding: 5px;
+		
     
     #mapid {
         background-color: $color-map;
         width: 100%;
-        height: 70%;
+				height: 70%;
     }
 
     #chart {
@@ -69,8 +59,11 @@ body {
     }
 }
 
-#right {
-    background-color: $color-primary;
+.right {
+		background-color: $color-primary;
+		overflow-x: auto;
+		height: 100%;
+		color: $color-text-light
 }
 
 .footer {

@@ -4,8 +4,9 @@ import '../node_modules/bootstrap/dist/js/bootstrap.bundle';
 import './styles/styles.scss';
 import {initMap} from './js/map';
 import {generateMainTable, generateCountryTable} from './js/blocks'
+
 const url = 'https://api.covid19api.com/summary'
-let data;
+export let data;
 
 
 //Load data from API
@@ -13,7 +14,7 @@ async function loadData(url) {
     let response = await fetch(url);
     if (response.ok) {
 				data = await response.json();
-				//console.log(data);
+				console.log(data.Countries);
 				generateIndexPage(data);
     } else {
         alert('error');
@@ -21,7 +22,7 @@ async function loadData(url) {
 }
 
 function generateIndexPage(data) {
-  generateMainTable(data.Global);
+    generateMainTable(data.Countries);
 	generateCountryTable(data.Countries);
 	initMap(data.Countries);
 }
@@ -36,6 +37,5 @@ window.addEventListener('DOMContentLoaded', function() {
     init();
 })
 console.log('it works!');
-
 
 

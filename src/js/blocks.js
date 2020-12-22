@@ -14,32 +14,35 @@ const categories = {
 	NewRecovered: 'New Recovered',
 }
 const catArr = Object.entries(categories);
+console.log(catArr);
 let activeCountry = null;
 
 //Generate main table
-function generateMainTable(data) {
+function generateMainTable(data, parameter = "TotalConfirmed") {
+	countryTableContainer.innerHTML = '';
 	const cardBody = document.createElement('div');
 	cardBody.classList.add('card-body');
+	const cardHeader = document.createElement('div');
+	cardHeader.classList.add('card-header');
+	const per100K = document.createElement('span');
+	per100K.innerText = 'per 100K';
+	generateDropdowns(cardHeader, data);
+	cardHeader.appendChild(per100K);
   const table = document.createElement('table');
   const tbody = document.createElement('tbody');
-  tbody.innerHTML = `<tr><th  scope="row">Total infected:</th><td>${data['TotalConfirmed'].toLocaleString('en', { maximumFractionDigits: 0 })}</td></tr>
-  <tr><th  scope="row">Total deaths:</th><td>${data['TotalDeaths'].toLocaleString('en', { maximumFractionDigits: 0 })}</td></tr>
-  <tr><th  scope="row">Total recovered:</th><td>${data['TotalRecovered'].toLocaleString('en', { maximumFractionDigits: 0 })}</td></tr>
-  <tr><th  scope="row">New infected:</th><td>${data['NewConfirmed'].toLocaleString('en', { maximumFractionDigits: 0 })}</td></tr>
-  <tr><th  scope="row">New deaths:</th><td>${data['NewDeaths'].toLocaleString('en', { maximumFractionDigits: 0 })}</td></tr>
-  <tr><th  scope="row">New recovered:</th><td>${data['NewRecovered'].toLocaleString('en', { maximumFractionDigits: 0 })}</td></tr>
-  <tr><th  scope="row">Total infected per 100 000:</th><td>${parseInt(data['TotalConfirmed']/populationCoefficient)}</td></tr>
-  <tr><th  scope="row">Total deaths per 100 000:</th><td>${parseInt(data['TotalDeaths']/populationCoefficient)}</td></tr>
-  <tr><th  scope="row">Total recovered per 100 000:</th><td>${parseInt(data['TotalRecovered']/populationCoefficient)}</td></tr>
-  <tr><th  scope="row">New infected per 100 000:</th><td>${parseInt(data['NewConfirmed']/populationCoefficient)}</td></tr>
-  <tr><th  scope="row">New deaths per 100 000:</th><td>${parseInt(data['NewDeaths']/populationCoefficient)}</td></tr>
-  <tr><th  scope="row">New recovered per 100 000:</th><td>${parseInt(data['NewRecovered']/populationCoefficient)}</td></tr>`;
-  table.appendChild(tbody);
+//   console.log(data);
+  const sortedData = sortData(data, parameter);
+//   console.log(sortedData);
+  for(let i = 0; i < sortedData.length; i++) {
+    tbody.innerHTML += `<tr><th  scope="row">${sortedData[i][0]}</th><td>${sortedData[i][1].toLocaleString('en', { maximumFractionDigits: 0 })}</td></tr>`
+	}
+	table.appendChild(tbody);
 	cardBody.appendChild(table);
-	mainTableContainer.appendChild(cardBody);
+	mainTableContainer.appendChild(cardHeader);
+  mainTableContainer.appendChild(cardBody);
 }
 
-//Generate country table
+// Generate country table
 function generateCountryTable(data, parameter = "TotalConfirmed") {
 	countryTableContainer.innerHTML = '';
 	const cardBody = document.createElement('div');
@@ -49,7 +52,9 @@ function generateCountryTable(data, parameter = "TotalConfirmed") {
 	generateDropdowns(cardHeader, data);
   const table = document.createElement('table');
   const tbody = document.createElement('tbody');
+//   console.log(data);
   const sortedData = sortData(data, parameter);
+//   console.log(sortedData);
   for(let i = 0; i < sortedData.length; i++) {
     tbody.innerHTML += `<tr><th  scope="row">${sortedData[i][0]}</th><td>${sortedData[i][1].toLocaleString('en', { maximumFractionDigits: 0 })}</td></tr>`
 	}
@@ -76,6 +81,7 @@ function generateDropdowns(block, data) {
 		const ddItem = document.createElement('li');
 		const ddItemButton = document.createElement('button');
 		ddItemButton.id = i;
+		console.log(ddItemButton)
 		ddItemButton.classList.add('dropdown-item');
 		ddItemButton.setAttribute('type', 'button');
 		ddItemButton.innerText = catArr[i][1];

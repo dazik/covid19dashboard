@@ -35,7 +35,17 @@ body {
 .left {
     background-color: $color-primary;
 		height: 100%;
-		color: $color-text-light
+    color: $color-text-light;
+    overflow-x: auto; 
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      span {
+        font-size: 24px;
+      }
+    }
 }
 
 .middle {

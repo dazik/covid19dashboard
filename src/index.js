@@ -4,6 +4,7 @@ import '../node_modules/bootstrap/dist/js/bootstrap.bundle';
 import './styles/styles.scss';
 import {initMap} from './js/map';
 import {generateMainTable, generateCountryTable} from './js/blocks'
+import countries from './js/countries';
 
 const url = 'https://api.covid19api.com/summary'
 export let data;

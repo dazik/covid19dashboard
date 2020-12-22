@@ -1,5 +1,7 @@
 import {initMap, removeMap} from "./map";
-
+import countries from "./countries";
+console.log(countries)
+console.log(countries[0]['population'])
 let populationCoefficient;
 const mainTableContainer = document.querySelector('#mainTable');
 const countryTableContainer = document.querySelector('#countryTable');
@@ -31,9 +33,15 @@ function generateMainTable(data, parameter = "TotalConfirmed") {
   const table = document.createElement('table');
   const tbody = document.createElement('tbody');
 //   console.log(data);
-  const sortedData = sortData(data, parameter);
-//   console.log(sortedData);
+  const sortedData = sortData(data, parameter, countries);
+   console.log(sortedData);
   for(let i = 0; i < sortedData.length; i++) {
+
+	// if(countries[i]["name"] === sortedData[i][0]) {
+	// 	let population = countries[i]["population"];
+	// 	console.log(population);
+	// }
+
     tbody.innerHTML += `<tr><th  scope="row">${sortedData[i][0]}</th><td>${sortedData[i][1].toLocaleString('en', { maximumFractionDigits: 0 })}</td></tr>`
 	}
 	table.appendChild(tbody);
@@ -52,9 +60,10 @@ function generateCountryTable(data, parameter = "TotalConfirmed") {
 	generateDropdowns(cardHeader, data);
   const table = document.createElement('table');
   const tbody = document.createElement('tbody');
-//   console.log(data);
+  // console.log(data);
   const sortedData = sortData(data, parameter);
-//   console.log(sortedData);
+  populationPush(sortedData, countries);
+   console.log(sortedData);
   for(let i = 0; i < sortedData.length; i++) {
     tbody.innerHTML += `<tr><th  scope="row">${sortedData[i][0]}</th><td>${sortedData[i][1].toLocaleString('en', { maximumFractionDigits: 0 })}</td></tr>`
 	}
@@ -106,18 +115,33 @@ function chooseCategory(categoryId, data) {
 }
 
 //Sort by parameter function
-function sortData(data, parameter) {
+function sortData(data, parameter, countries) {
   let sortedData = [];
   for (let i = 0; i < data.length; i++) {
-    sortedData.push([data[i].Country, data[i].[parameter]])
+    sortedData.push([ data[i].Country, data[i].[parameter]])
   }
   sortedData.sort(function(a,b) {
     return b[1] - a[1];
   })
+
+
+
   return sortedData;
 }
 
-
+function populationPush(sortedData, countries) {
+	console.log(countries)
+	for (let i = 0; i < countries.length; i++) {
+		
+		for (let j = 0; j < sortedData.length; j++) {
+			if(countries[j]["name"] === sortedData[j][2]) {
+				sortedData[j].push[countries[j]["population"]]
+			}
+			
+		}
+	}
+	console.log(sortedData);
+}
 
 
 //Calculating the coefficient that shows cases per 100.000 people

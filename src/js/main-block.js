@@ -13,10 +13,10 @@ function GenerateTable(data, parameter = "TotalConfirmed"){
     const catArr = Object.entries(categories);
     console.log(catArr);
   
-    function sortData(data, parameter) {
+    function sortData(data, parameter, countries, name) {
       let sortedData = [];
       for (let i = 0; i < data.length; i++) {
-        sortedData.push([data[i].Country, data[i][parameter]])
+        sortedData.push([data[i].Country, data[i][parameter]], countries[i][name]);
       }
       sortedData.sort(function(a,b) {
         return b[1] - a[1];

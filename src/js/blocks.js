@@ -1,5 +1,6 @@
 import {initMap, removeMap} from "./map";
 import countries from './countries';
+import {drawChart} from './charts';
 let populationCoefficient;
 const mainTableContainer = document.querySelector('#mainTable');
 const countryTableContainer = document.querySelector('#countryTable');
@@ -89,6 +90,7 @@ function addSearch(data) {
 
 function searchCountry(data, e) {
 	generateMainTable(data, e.value);
+	drawChart(e.value);
 }
 
 //Complementing the search string
@@ -142,6 +144,7 @@ function generateCountryTable(data, parameter = "TotalConfirmed") {
 		tr.addEventListener('click', function() {
 			console.log(sortedData[i][0]);
 			generateMainTable(data, sortedData[i][0]);
+			drawChart(sortedData[i][0]);
 		})
 		tbody.appendChild(tr);
 	}

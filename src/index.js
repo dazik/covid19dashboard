@@ -45,10 +45,7 @@ function hideLoader() {
 function init() {
 	loadData(url);
 	//console.log(countries);
-<<<<<<< HEAD
   drawChart();
-=======
->>>>>>> develop
 }
 //Initialize the app when all loaded
 window.addEventListener('DOMContentLoaded', function () {
@@ -59,7 +56,3 @@ console.log('it works!');
 
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> develop

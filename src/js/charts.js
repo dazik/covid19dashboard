@@ -1,4 +1,4 @@
-const ctx = document.getElementById('myChart').getContext('2d');
+const chartContainer = document.getElementById('chart');
 let ylabel = [];
 let xlabel = [];
 let data;
@@ -11,7 +11,9 @@ async function getData(country) {
 }
 
 async function sortData(country) {
-  await getData(country);
+	await getData(country);
+	xlabel = [];
+	ylabel = [];
   if (country === 'all') {
 		for (let i in data.cases) {
 			ylabel.push([data.cases[i]]);
@@ -25,6 +27,11 @@ async function sortData(country) {
 	}
 }
 async function drawChart(country = 'all') {
+	chartContainer.innerHTML = '';
+	const canvas = document.createElement('canvas');
+	canvas.id = 'myChart';
+	chartContainer.appendChild(canvas);
+	const ctx = document.getElementById('myChart').getContext('2d');
   await sortData(country);
   const myChart = new Chart(ctx, {
     type: 'line',

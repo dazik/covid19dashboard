@@ -91,8 +91,9 @@ function searchCountry(data, e) {
 //Complementing the search string
 function searchComplementation(data, e) {
 	console.log(e.value);
+	const searchString = e.value[0].toUpperCase() + e.value.substring(1);
 	data.Countries.forEach(element => {
-		if (element.Country.includes(e.value)) {
+		if (element.Country.startsWith(searchString)) {
 			console.log(element);
 		}
 	})

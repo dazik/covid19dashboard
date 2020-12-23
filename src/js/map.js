@@ -17,7 +17,7 @@ function createMap() {
 function createCircles(data, parameter) {
 	//console.log(data);
 	const sortedData = sortData(data, parameter);
-	console.log(coordinates[`${sortedData[0][0]}`]);
+	//console.log(coordinates[`${sortedData[0][0]}`]);
 	for(let i = 0; i < sortedData.length; i++) {
 		const coordArr = [];
 		coordArr.push(coordinates[`${sortedData[i][0]}`][1]);

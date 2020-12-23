@@ -74,3 +74,63 @@ body {
         text-align: center;
     }
 }
+
+.search-block {
+	margin-bottom: 20px;
+}
+
+.maintable-header {
+	font-size: 18px;
+	font-weight: 600;
+	font-style: italic;
+	color: #f55;
+}
+
+.loader {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #0e1e2f;
+	z-index: 1050;
+}
+
+.caching-message {
+	color: #ff0000;
+	font-weight: 600;
+	font-size: 36px;
+}
+
+.flag {
+	width: 24px;
+}
+
+.country-tr:hover {
+	font-weight: 600;
+	cursor: pointer;
+	background-color: #4e4e4e;
+}
+
+.loader-animation {
+	background-image: url("../assets/loader.gif");
+	background-size: 400px 300px;
+	width: 400px;
+	height: 300px;
+}
+
+body .loading {
+	overflow: hidden;
+}
+
+.hidden {
+	display: none;
+}
+
+.hiding {
+	transition: 1s;
+	opacity: 0;
+}

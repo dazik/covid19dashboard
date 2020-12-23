@@ -109,15 +109,31 @@ function generateCountryTable(data, parameter = "TotalConfirmed") {
 	generateDropdowns(cardHeader, data);
   const table = document.createElement('table');
   const tbody = document.createElement('tbody');
-  const sortedData = sortData(data, parameter);
+	const sortedData = sortData(data, parameter);
+	addFlagsToArray(sortedData);
+	console.log(sortedData);
   for(let i = 0; i < sortedData.length; i++) {
-    tbody.innerHTML += `<tr><th  scope="row">${sortedData[i][0]}</th><td>${sortedData[i][1].toLocaleString('en', { maximumFractionDigits: 0 })}</td></tr>`
+    tbody.innerHTML += `<tr><td><img src=${sortedData[i][2]} class="flag"></td><th  scope="row">${sortedData[i][0]}</th><td>${sortedData[i][1].toLocaleString('en', { maximumFractionDigits: 0 })}</td></tr>`
 	}
 	table.appendChild(tbody);
 	cardBody.appendChild(table);
 	countryTableContainer.appendChild(cardHeader);
   countryTableContainer.appendChild(cardBody);
 }
+
+//Add flags to array of countries
+function addFlagsToArray(array) {
+	array.forEach(element => {
+		countries.forEach(felement => {
+			if (element[0] === felement.name) {
+				element.push(felement.flag);
+			}
+		})
+	})
+	return array;
+}
+
+
 //Add dropdowns to countries block
 function generateDropdowns(block, data) {	
 	//console.log(catArr);

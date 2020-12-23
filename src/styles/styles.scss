@@ -85,3 +85,21 @@ body {
 	font-style: italic;
 	color: #f55;
 }
+
+.loader {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.caching-message {
+	color: #ff0000;
+	font-weight: 600;
+	font-size: 36px;
+}
+
+.flag {
+	width: 24px;
+}

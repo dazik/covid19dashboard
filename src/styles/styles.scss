@@ -92,24 +92,28 @@ body {
 }
 
 @media only screen and (max-width: 768px) {
+  
   [data-tab-content] {
     display: none;
   }
 
-  .active {
+  .my-active[data-tab-content] {
     display: block;
   }
 
-  .middle {
-    display: block;
+  
+
+
+  
+  .left {
+    order: 2;
+    
   }
-  // .left {
-  //   order: 2;
-  //   display: none;
-  // }
-  // .right {
-  //   display: none;
-  // }
+  
+
+  .hidden {
+    display: none;
+  }
 
   #search-bar {
     display: none;
@@ -146,16 +150,15 @@ body {
     display: none;
   }
 
-  [data-tab-content] {
+  
+  
+
+  .my-active[data-tab-content] {
+    display: block;
+  }
+
+  .hidden {
     display: none;
-  }
-
-  .active {
-    display: block;
-  }
-
-  .middle {
-    display: block;
   }
 }
 

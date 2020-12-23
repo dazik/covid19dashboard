@@ -6,9 +6,9 @@ function tabsFunction() {
         tab.addEventListener('click', () => {
             const target = document.querySelector(tab.dataset.tabTarget);
             tabsContents.forEach(tabContent => {
-                tabContent.classList.remove('active');
+                tabContent.classList.remove('my-active');
             })
-            target.classList.add('active');
+            target.classList.add('my-active');
         })
     })
 }

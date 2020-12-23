@@ -1,6 +1,6 @@
 // import script for bootstrap
 import '../node_modules/bootstrap/dist/js/bootstrap.bundle';
-
+import { drawChart } from './js/charts';
 import './styles/styles.scss';
 import {initMap} from './js/map';
 import {generateMainTable, generateCountryTable} from './js/blocks';
@@ -45,13 +45,21 @@ function hideLoader() {
 function init() {
 	loadData(url);
 	//console.log(countries);
+<<<<<<< HEAD
+  drawChart();
+=======
+>>>>>>> develop
 }
 //Initialize the app when all loaded
-window.addEventListener('DOMContentLoaded', function() {
-    init();
-})
+window.addEventListener('DOMContentLoaded', function () {
+  init();
+});
 console.log('it works!');
 
 
 
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> develop

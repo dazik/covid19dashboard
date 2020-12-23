@@ -25,7 +25,8 @@ function generateMainTable(data, country = 'Global') {
 	cardHeader.classList.add('maintable-header');
   const table = document.createElement('table');
 	const tbody = document.createElement('tbody');
-	
+	opData = data.Global;
+	cardHeader.innerText = 'Global';
 	if (country !== 'Global') {
 		data.Countries.forEach(element => {
 			if ((country.toLowerCase() == element.Slug) || (country === element.Country)){
@@ -41,9 +42,6 @@ function generateMainTable(data, country = 'Global') {
 				})
 			}
 		})
-	} else {
-		cardHeader.innerText = 'Global';
-		opData = data.Global;
 	}
 		tbody.innerHTML = `<tr><th  scope="row">Total infected:</th><td>${opData['TotalConfirmed'].toLocaleString('en', { maximumFractionDigits: 0 })}</td></tr>
 		<tr><th  scope="row">Total deaths:</th><td>${opData['TotalDeaths'].toLocaleString('en', { maximumFractionDigits: 0 })}</td></tr>

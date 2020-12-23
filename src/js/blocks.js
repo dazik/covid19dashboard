@@ -117,7 +117,12 @@ function searchComplementation(data, e) {
 
 //Generate country table
 function generateCountryTable(data, parameter = "TotalConfirmed") {
-	const opData = data.Countries;
+	let opData;
+	if (data.Countries !== undefined) {
+		opData = data.Countries;
+	} else {
+		opData = data;
+	}
 	countryTableContainer.innerHTML = '';
 	const cardBody = document.createElement('div');
 	cardBody.classList.add('card-body');
@@ -191,7 +196,6 @@ function generateDropdowns(block, data) {
 
 //Choose category
 function chooseCategory(categoryId, data) {
-	//console.log(catArr[categoryId][0]);
 	activeCategoryId = categoryId;
 	generateCountryTable(data, catArr[categoryId][0]);
 	removeMap();
@@ -200,7 +204,8 @@ function chooseCategory(categoryId, data) {
 
 //Sort by parameter function
 function sortData(data, parameter) {
-  let sortedData = [];
+	let sortedData = [];
+	console.log(data);
   for (let i = 0; i < data.length; i++) {
     sortedData.push([data[i].Country, data[i].[parameter]])
   }

@@ -3,7 +3,7 @@ import {sortData} from './blocks';
 let mymap;
 function createMap() {
 	mymap = L.map('mapid').setView([30, 0], 2);
-	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZGF6aWsiLCJhIjoiY2tpbG41bjhhMDR0azJ6bzU4ODVvMWQycyJ9.vKLXfdMaasuqRtFGx8HuLw', {
+	L.tileLayer('https://api.mapbox.com/styles/v1/dazik/ckj1t1omz9yk219qt11cp3s09/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZGF6aWsiLCJhIjoiY2tpbG41bjhhMDR0azJ6bzU4ODVvMWQycyJ9.vKLXfdMaasuqRtFGx8HuLw', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
     id: 'mapbox/streets-v11',
@@ -23,8 +23,8 @@ function createCircles(data, parameter) {
 		coordArr.push(coordinates[`${sortedData[i][0]}`][1]);
 		coordArr.push(coordinates[`${sortedData[i][0]}`][0]);
 		var circle = L.circle(coordArr, {
-			color: 'red',
-			fillColor: '#f03',
+			color: '#f66',
+			fillColor: '#f55',
 			fillOpacity: 0.7,
 			radius: 10000 + sortedData[i][1]*300000/10000000
 	}).addTo(mymap);

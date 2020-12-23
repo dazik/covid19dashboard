@@ -15,6 +15,7 @@ async function loadData(url) {
 				data = await response.json();
 				//console.log(data);
 				generateIndexPage(data);
+				setTimeout(hideLoader, 1000);
     } else {
         alert('error');
     }
@@ -29,6 +30,14 @@ function generateIndexPage(data) {
 	initMap(data.Countries);
 }
 
+//Hide loading animation
+function hideLoader() {
+	document.body.classList.remove('loading');
+	document.querySelector('.loader').classList.add('hiding')
+	setTimeout(function() {
+		document.querySelector('.loader').classList.add('hidden')
+	}, 1000)
+}
 
 //Initialization function
 function init() {

@@ -87,12 +87,16 @@ body {
 }
 
 .loader {
+	position: absolute;
+	top: 0;
+	left: 0;
 	width: 100vw;
 	height: 100vh;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	background-color: #0e1e2f;
+	z-index: 1050;
 }
 
 .caching-message {
@@ -113,4 +117,20 @@ body {
 
 .loader-animation {
 	background-image: url("../assets/loader.gif");
+	background-size: 400px 300px;
+	width: 400px;
+	height: 300px;
+}
+
+body .loading {
+	overflow: hidden;
+}
+
+.hidden {
+	display: none;
+}
+
+.hiding {
+	transition: 1s;
+	opacity: 0;
 }

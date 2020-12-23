@@ -25,10 +25,12 @@ function generateMainTable(data, country = 'Global') {
 	cardHeader.classList.add('maintable-header');
   const table = document.createElement('table');
 	const tbody = document.createElement('tbody');
+	
 	if (country !== 'Global') {
 		data.Countries.forEach(element => {
-			if (country.toLowerCase() == element.Slug) {
+			if ((country.toLowerCase() == element.Slug) || (country === element.Country)){
 				console.log(data);
+				console.log('asd');
 				opData = element;
 				cardHeader.innerText = element.Country;
 				countries.forEach(element => {
@@ -101,19 +103,27 @@ function searchComplementation(data, e) {
 
 //Generate country table
 function generateCountryTable(data, parameter = "TotalConfirmed") {
+	const opData = data.Countries;
 	countryTableContainer.innerHTML = '';
 	const cardBody = document.createElement('div');
 	cardBody.classList.add('card-body');
 	const cardHeader = document.createElement('div');
 	cardHeader.classList.add('card-body');
-	generateDropdowns(cardHeader, data);
+	generateDropdowns(cardHeader, opData);
   const table = document.createElement('table');
   const tbody = document.createElement('tbody');
-	const sortedData = sortData(data, parameter);
+	const sortedData = sortData(opData, parameter);
 	addFlagsToArray(sortedData);
 	console.log(sortedData);
   for(let i = 0; i < sortedData.length; i++) {
-    tbody.innerHTML += `<tr><td><img src=${sortedData[i][2]} class="flag"></td><th  scope="row">${sortedData[i][0]}</th><td>${sortedData[i][1].toLocaleString('en', { maximumFractionDigits: 0 })}</td></tr>`
+		const tr = document.createElement('tr');
+		tr.classList.add('country-tr');
+    tr.innerHTML += `<td><img src=${sortedData[i][2]} class="flag"></td><th  scope="row">${sortedData[i][0]}</th><td>${sortedData[i][1].toLocaleString('en', { maximumFractionDigits: 0 })}</td>`
+		tr.addEventListener('click', function() {
+			console.log(sortedData[i][0]);
+			generateMainTable(data, sortedData[i][0]);
+		})
+		tbody.appendChild(tr);
 	}
 	table.appendChild(tbody);
 	cardBody.appendChild(table);

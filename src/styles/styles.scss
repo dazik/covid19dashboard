@@ -92,6 +92,7 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	background-color: #0e1e2f;
 }
 
 .caching-message {
@@ -102,4 +103,10 @@ body {
 
 .flag {
 	width: 24px;
+}
+
+.country-tr:hover {
+	font-weight: 600;
+	cursor: pointer;
+	background-color: #4e4e4e;
 }

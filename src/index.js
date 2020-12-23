@@ -25,7 +25,7 @@ function generateIndexPage(data) {
 		document.body.innerHTML = '<div class="loader"><div class="caching-message">Caching in progress</div></div>';
 	}
   generateMainTable(data);
-	generateCountryTable(data.Countries);
+	generateCountryTable(data);
 	initMap(data.Countries);
 }
 

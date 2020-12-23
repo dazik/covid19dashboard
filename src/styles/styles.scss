@@ -37,6 +37,7 @@ body {
 		height: 100%;
     color: $color-text-light;
     overflow-x: auto; 
+    
 
     .card-header {
       display: flex;
@@ -53,7 +54,8 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
-		padding: 5px;
+    padding: 5px;
+    
 		
     
     #mapid {
@@ -73,7 +75,8 @@ body {
 		background-color: $color-primary;
 		overflow-x: auto;
 		height: 100%;
-		color: $color-text-light
+    color: $color-text-light;
+    
 }
 
 .footer {
@@ -83,4 +86,60 @@ body {
     >* {
         text-align: center;
     }
+  .tabs{
+      display: none;
+    }
 }
+
+@media only screen and (max-width: 768px) {
+  [data-tab-content] {
+    display: none;
+  }
+
+  .active {
+    display: block;
+  }
+
+  // .left {
+  //   order: 2;
+  //   display: none;
+  // }
+  // .right {
+  //   display: none;
+  // }
+
+  #search-bar {
+    display: none;
+  }
+
+  .footer {
+    .tabs {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      >* {
+        margin-right: 10px;
+      }
+    }
+
+    h2 {
+      display: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .left {
+    order: 2;
+    display: none;
+  }
+  .right {
+    display: none;
+  }
+
+  #search-bar {
+    display: none;
+  }
+}
+
+

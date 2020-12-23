@@ -19,7 +19,7 @@
   <header class="header">
     <nav class="navbar navbar-dark">
       <a class="navbar-brand" href="#">COVID-19 Dashboard</a>
-      <form class="form-inline my-2 my-lg-0">
+      <form class="form-inline my-2 my-lg-0" id="search-bar">
         <input class="form-control mr-sm-2" type="search" placeholder="Type here..." aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
@@ -27,20 +27,25 @@
   </header>
   <div class="container-fluid" id="main">
     <div class="row">
-      <div class="col left card" id="mainTable">
+      <div class="col left card" id="mainTable" data-tab-content>
       </div>
-      <div class="container-fluid col-6 middle">
+      <div class=" col-lg-6 col-md-6 col-sm middle" id="map-and-chart" data-tab-content class="active">
           <div id="mapid"></div>
           <div id="chart">
 						<span>place for chart</span>
 					</div>
       </div>
-      <div class="col right card" id="countryTable">
+      <div class="col right card" id="countryTable" data-tab-content>
       </div>
     </div>
   </div>
   <footer class="footer">
-    <h2>Footer</h2>
+    <h2>Footer</h2> 
+    <div class="tabs"> 
+      <button type="button" class="btn btn-success" data-tab-target="#map-and-chart">Map adn chart</button>
+      <button type="button" class="btn btn-success" data-tab-target="#mainTable">Main table</button>
+      <button type="button" class="btn btn-success" data-tab-target="#countryTable">Countries table</button>
+    </div>
   </footer>
 
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"

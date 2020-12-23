@@ -5,10 +5,12 @@ import './styles/styles.scss';
 import {initMap} from './js/map';
 import {generateMainTable, generateCountryTable} from './js/blocks'
 import countries from './js/countries';
+import {tabsFunction} from './js/tabs';
 
 const url = 'https://api.covid19api.com/summary'
 export let data;
 
+tabsFunction();
 
 //Load data from API
 async function loadData(url) {
@@ -38,5 +40,7 @@ window.addEventListener('DOMContentLoaded', function() {
     init();
 })
 console.log('it works!');
+
+
 
 

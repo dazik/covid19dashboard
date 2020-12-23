@@ -140,6 +140,14 @@ body {
   #search-bar {
     display: none;
   }
+
+  [data-tab-content] {
+    display: none;
+  }
+
+  .active {
+    display: block;
+  }
 }
 
 

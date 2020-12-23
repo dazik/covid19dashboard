@@ -35,7 +35,18 @@ body {
 .left {
     background-color: $color-primary;
 		height: 100%;
-		color: $color-text-light
+    color: $color-text-light;
+    overflow-x: auto; 
+    
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      span {
+        font-size: 24px;
+      }
+    }
 }
 
 .middle {
@@ -43,7 +54,8 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
-		padding: 5px;
+    padding: 5px;
+    
 		
     
     #mapid {
@@ -63,7 +75,8 @@ body {
 		background-color: $color-primary;
 		overflow-x: auto;
 		height: 100%;
-		color: $color-text-light
+    color: $color-text-light;
+    
 }
 
 .footer {
@@ -73,4 +86,141 @@ body {
     >* {
         text-align: center;
     }
+  .tabs{
+      display: none;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+  
+  [data-tab-content] {
+    display: none;
+  }
+
+  .my-active[data-tab-content] {
+    display: block;
+  }
+
+  
+
+
+  
+  .left {
+    order: 2;
+    
+  }
+  
+
+  .hidden {
+    display: none;
+  }
+
+  #search-bar {
+    display: none;
+  }
+
+  .footer {
+    .tabs {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      >* {
+        margin-right: 10px;
+      }
+    }
+
+    h2 {
+      display: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .left {
+    order: 2;
+    display: none;
+  }
+  .right {
+    display: none;
+  }
+
+  
+
+  #search-bar {
+    display: none;
+  }
+
+  
+  
+
+  .my-active[data-tab-content] {
+    display: block;
+  }
+
+  .hidden {
+    display: none;
+  }
+}
+
+
+
+
+.search-block {
+	margin-bottom: 20px;
+}
+
+.maintable-header {
+	font-size: 18px;
+	font-weight: 600;
+	font-style: italic;
+	color: #f55;
+}
+
+.loader {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #0e1e2f;
+	z-index: 1050;
+}
+
+.caching-message {
+	color: #ff0000;
+	font-weight: 600;
+	font-size: 36px;
+}
+
+.flag {
+	width: 24px;
+}
+
+.country-tr:hover {
+	font-weight: 600;
+	cursor: pointer;
+	background-color: #4e4e4e;
+}
+
+.loader-animation {
+	background-image: url("../assets/loader.gif");
+	background-size: 400px 300px;
+	width: 400px;
+	height: 300px;
+}
+
+body .loading {
+	overflow: hidden;
+}
+
+.hidden {
+	display: none;
+}
+
+.hiding {
+	transition: 1s;
+	opacity: 0;
 }

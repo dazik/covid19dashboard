@@ -1,9 +1,8 @@
 import {initMap, removeMap} from "./map";
-
+import countries from './countries';
 let populationCoefficient;
 const mainTableContainer = document.querySelector('#mainTable');
 const countryTableContainer = document.querySelector('#countryTable');
-const mapContainer = document.querySelector('#mapid');
 let activeCategoryId = 0;
 const categories = {
 	TotalConfirmed: 'Total cases',
@@ -17,26 +16,86 @@ const catArr = Object.entries(categories);
 let activeCountry = null;
 
 //Generate main table
-function generateMainTable(data) {
+function generateMainTable(data, country = 'Global') {
+	mainTableContainer.innerHTML = '';
+	let opData;
 	const cardBody = document.createElement('div');
 	cardBody.classList.add('card-body');
+	const cardHeader = document.createElement('span');
+	cardHeader.classList.add('maintable-header');
   const table = document.createElement('table');
-  const tbody = document.createElement('tbody');
-  tbody.innerHTML = `<tr><th  scope="row">Total infected:</th><td>${data['TotalConfirmed'].toLocaleString('en', { maximumFractionDigits: 0 })}</td></tr>
-  <tr><th  scope="row">Total deaths:</th><td>${data['TotalDeaths'].toLocaleString('en', { maximumFractionDigits: 0 })}</td></tr>
-  <tr><th  scope="row">Total recovered:</th><td>${data['TotalRecovered'].toLocaleString('en', { maximumFractionDigits: 0 })}</td></tr>
-  <tr><th  scope="row">New infected:</th><td>${data['NewConfirmed'].toLocaleString('en', { maximumFractionDigits: 0 })}</td></tr>
-  <tr><th  scope="row">New deaths:</th><td>${data['NewDeaths'].toLocaleString('en', { maximumFractionDigits: 0 })}</td></tr>
-  <tr><th  scope="row">New recovered:</th><td>${data['NewRecovered'].toLocaleString('en', { maximumFractionDigits: 0 })}</td></tr>
-  <tr><th  scope="row">Total infected per 100 000:</th><td>${parseInt(data['TotalConfirmed']/populationCoefficient)}</td></tr>
-  <tr><th  scope="row">Total deaths per 100 000:</th><td>${parseInt(data['TotalDeaths']/populationCoefficient)}</td></tr>
-  <tr><th  scope="row">Total recovered per 100 000:</th><td>${parseInt(data['TotalRecovered']/populationCoefficient)}</td></tr>
-  <tr><th  scope="row">New infected per 100 000:</th><td>${parseInt(data['NewConfirmed']/populationCoefficient)}</td></tr>
-  <tr><th  scope="row">New deaths per 100 000:</th><td>${parseInt(data['NewDeaths']/populationCoefficient)}</td></tr>
-  <tr><th  scope="row">New recovered per 100 000:</th><td>${parseInt(data['NewRecovered']/populationCoefficient)}</td></tr>`;
-  table.appendChild(tbody);
+	const tbody = document.createElement('tbody');
+	if (country !== 'Global') {
+		data.Countries.forEach(element => {
+			if (country.toLowerCase() == element.Slug) {
+				console.log(data);
+				opData = element;
+				cardHeader.innerText = element.Country;
+				countries.forEach(element => {
+					if ((element.name.toLowerCase() === opData.Slug) || (element.name === opData.Country)) {
+						calcPopulationCoefficient(element.population);
+						console.log(populationCoefficient);
+					}
+				})
+			}
+		})
+	} else {
+		cardHeader.innerText = 'Global';
+		opData = data.Global;
+	}
+		tbody.innerHTML = `<tr><th  scope="row">Total infected:</th><td>${opData['TotalConfirmed'].toLocaleString('en', { maximumFractionDigits: 0 })}</td></tr>
+		<tr><th  scope="row">Total deaths:</th><td>${opData['TotalDeaths'].toLocaleString('en', { maximumFractionDigits: 0 })}</td></tr>
+		<tr><th  scope="row">Total recovered:</th><td>${opData['TotalRecovered'].toLocaleString('en', { maximumFractionDigits: 0 })}</td></tr>
+		<tr><th  scope="row">New infected:</th><td>${opData['NewConfirmed'].toLocaleString('en', { maximumFractionDigits: 0 })}</td></tr>
+		<tr><th  scope="row">New deaths:</th><td>${opData['NewDeaths'].toLocaleString('en', { maximumFractionDigits: 0 })}</td></tr>
+		<tr><th  scope="row">New recovered:</th><td>${opData['NewRecovered'].toLocaleString('en', { maximumFractionDigits: 0 })}</td></tr>
+		<tr><th  scope="row">Total infected per 100 000:</th><td>${parseInt(opData['TotalConfirmed']/populationCoefficient)}</td></tr>
+		<tr><th  scope="row">Total deaths per 100 000:</th><td>${parseInt(opData['TotalDeaths']/populationCoefficient)}</td></tr>
+		<tr><th  scope="row">Total recovered per 100 000:</th><td>${parseInt(opData['TotalRecovered']/populationCoefficient)}</td></tr>
+		<tr><th  scope="row">New infected per 100 000:</th><td>${parseInt(opData['NewConfirmed']/populationCoefficient)}</td></tr>
+		<tr><th  scope="row">New deaths per 100 000:</th><td>${parseInt(opData['NewDeaths']/populationCoefficient)}</td></tr>
+		<tr><th  scope="row">New recovered per 100 000:</th><td>${parseInt(opData['NewRecovered']/populationCoefficient)}</td></tr>`;
+	table.appendChild(tbody);
+	cardBody.appendChild(addSearch(data));
+	cardBody.appendChild(cardHeader);
 	cardBody.appendChild(table);
 	mainTableContainer.appendChild(cardBody);
+}
+
+//add search in main block
+function addSearch(data) {
+	const form = document.createElement('form');
+	form.classList.add('form-inline', 'search-block');
+	const input = document.createElement('input');
+	input.classList.add('form-control', 'mr-sm-2');
+	input.setAttribute('type', 'search');
+	input.setAttribute('placeholder', 'Search country');
+	const button = document.createElement('button');
+	button.classList.add('btn', 'btn-outline-success', 'my-2', 'my-sm-0');
+	button.innerText = 'Search';
+	form.appendChild(input);
+	form.appendChild(button);
+	form.addEventListener('change', function() {
+		searchCountry(data, input);
+	});
+	form.addEventListener('input', function() {
+		searchComplementation(data, input);
+	});
+	return form;
+}
+
+function searchCountry(data, e) {
+	generateMainTable(data, e.value);
+}
+
+//Complementing the search string
+function searchComplementation(data, e) {
+	console.log(e.value);
+	data.Countries.forEach(element => {
+		if (element.Country.includes(e.value)) {
+			console.log(element);
+		}
+	})
 }
 
 //Generate country table
@@ -60,7 +119,7 @@ function generateCountryTable(data, parameter = "TotalConfirmed") {
 }
 //Add dropdowns to countries block
 function generateDropdowns(block, data) {	
-	console.log(catArr);
+	//console.log(catArr);
 	const dropdownContainer = document.createElement('div');
 	dropdownContainer.classList.add('dropdown');
 	const ddButton = document.createElement('button');
@@ -92,7 +151,7 @@ function generateDropdowns(block, data) {
 
 //Choose category
 function chooseCategory(categoryId, data) {
-	console.log(catArr[categoryId][0]);
+	//console.log(catArr[categoryId][0]);
 	activeCategoryId = categoryId;
 	generateCountryTable(data, catArr[categoryId][0]);
 	removeMap();

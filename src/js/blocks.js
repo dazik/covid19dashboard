@@ -72,6 +72,7 @@ function addSearch(data) {
 	input.classList.add('form-control', 'mr-sm-2');
 	input.setAttribute('type', 'search');
 	input.setAttribute('placeholder', 'Search country');
+	input.id = 'search';
 	const button = document.createElement('button');
 	button.classList.add('btn', 'btn-outline-success', 'my-2', 'my-sm-0');
 	button.innerText = 'Search';
@@ -92,12 +93,27 @@ function searchCountry(data, e) {
 
 //Complementing the search string
 function searchComplementation(data, e) {
-	console.log(e.value);
+	let flagurl = '';
+	const ul = document.createElement('ul');
+	ul.classList.add('dropdown-menu', 'show');
+	ul.setAttribute('style', 'position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 38.4px);');
 	const searchString = e.value[0].toUpperCase() + e.value.substring(1);
 	data.Countries.forEach(element => {
 		if (element.Country.startsWith(searchString)) {
 			console.log(element);
+			countries.forEach(country => {
+				if (element.Country === country.name) {
+					flagurl = country.flag;
+					console.log(flagurl);
+				}
+			})
+			const li = document.createElement('li');
+			li.classList.add('dropdown-item');
+			li.innerHTML = `<img class="flag" src=${flagurl}><span>${element.Country}</span>`;
+			ul.appendChild(li);
 		}
+	const input = document.getElementById('search');
+	input.appendChild(ul);
 	})
 }
 
@@ -114,7 +130,6 @@ function generateCountryTable(data, parameter = "TotalConfirmed") {
   const tbody = document.createElement('tbody');
 	const sortedData = sortData(opData, parameter);
 	addFlagsToArray(sortedData);
-	console.log(sortedData);
   for(let i = 0; i < sortedData.length; i++) {
 		const tr = document.createElement('tr');
 		tr.classList.add('country-tr');

@@ -15,6 +15,9 @@ body {
     background-color: $color-primary;
     color: $color-title;
     
+    .credits {
+      display: none;
+    }
 }
 
 #main {
@@ -93,6 +96,10 @@ body {
 }
 
 @media only screen and (max-width: 768px) {
+
+  .header .credits {
+    display: block;
+  }
   
   [data-tab-content] {
     display: none;
@@ -121,6 +128,10 @@ body {
   }
 
   .footer {
+    .credits {
+      display: none;
+    }
+
     .tabs {
       display: flex;
       justify-content: center;
@@ -137,6 +148,14 @@ body {
 }
 
 @media only screen and (max-width: 576px) {
+  .header .credits {
+    display: block;
+  }
+
+  .credits {
+    display: none;
+  }
+
   .left {
     order: 2;
     display: none;

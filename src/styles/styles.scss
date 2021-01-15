@@ -1,0 +1,251 @@
+$color-primary: rgb(53, 53, 53);
+$body-bg:  rgb(24, 24, 24);
+$color-title: #00C3B3;
+$color-map: #D5BCA2;
+$color-text-light: #ddd;
+
+
+body {
+    box-sizing: border-box;
+    background-color: $body-bg;
+}
+
+.header {
+    height: 50px;
+    background-color: $color-primary;
+    color: $color-title;
+    
+    .credits {
+      display: none;
+    }
+}
+
+#main {
+    // minus height of header and footer
+    height: calc(100vh - 100px);
+    
+    >.row {
+      height: 100%;
+    //   >* {
+    //      border: 5px solid $body-bg;
+    //   }
+      display: flex;
+      gap: 10px;
+      padding: 5px;
+    }
+}
+
+.left {
+    background-color: $color-primary;
+		height: 100%;
+    color: $color-text-light;
+    overflow-x: auto; 
+    
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      span {
+        font-size: 24px;
+      }
+    }
+}
+
+.middle {
+    background-color: $color-primary;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 5px;
+    
+		
+    
+    #mapid {
+        background-color: $color-map;
+        width: 100%;
+				height: 70%;
+    }
+
+    #chart {
+        background-color: $color-map;
+        width: 100%;
+        height: 30%;
+    }
+}
+
+.right {
+		background-color: $color-primary;
+		overflow-x: auto;
+		height: 100%;
+    color: $color-text-light;
+    
+}
+
+.footer {
+		height: 50px;
+		padding: 10px;
+    background-color: $color-primary;
+    color: $color-title;
+    >* {
+        text-align: center;
+    }
+  .tabs{
+      display: none;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+
+  .header .credits {
+    display: block;
+  }
+  
+  [data-tab-content] {
+    display: none;
+  }
+
+  .my-active[data-tab-content] {
+    display: block;
+  }
+
+  
+
+
+  
+  .left {
+    order: 2;
+    
+  }
+  
+
+  .hidden {
+    display: none;
+  }
+
+  #search-bar {
+    display: none;
+  }
+
+  .footer {
+    .credits {
+      display: none;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      >* {
+        margin-right: 10px;
+      }
+    }
+
+    h2 {
+      display: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .header .credits {
+    display: block;
+  }
+
+  .credits {
+    display: none;
+  }
+
+  .left {
+    order: 2;
+    display: none;
+  }
+  .right {
+    display: none;
+  }
+
+  
+
+  #search-bar {
+    display: none;
+  }
+
+  
+  
+
+  .my-active[data-tab-content] {
+    display: block;
+  }
+
+  .hidden {
+    display: none;
+  }
+}
+
+
+
+
+.search-block {
+	margin-bottom: 20px;
+}
+
+.maintable-header {
+	font-size: 18px;
+	font-weight: 600;
+	font-style: italic;
+	color: #f55;
+}
+
+.loader {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #0e1e2f;
+	z-index: 1050;
+}
+
+.caching-message {
+	color: #ff0000;
+	font-weight: 600;
+	font-size: 36px;
+}
+
+.flag {
+	width: 24px;
+}
+
+.country-tr:hover {
+	font-weight: 600;
+	cursor: pointer;
+	background-color: #4e4e4e;
+}
+
+.loader-animation {
+	background-image: url("../assets/loader.gif");
+	background-size: 400px 300px;
+	width: 400px;
+	height: 300px;
+}
+
+body .loading {
+	overflow: hidden;
+}
+
+.hidden {
+	display: none;
+}
+
+.hiding {
+	transition: 1s;
+	opacity: 0;
+}
+
+.logo-footer {
+	width: 75px;
+	opacity: 0.7;
+}

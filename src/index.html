@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COVID-19 Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin="" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+</head>
+
+<body class="loading">
+  <div class="loader"><div class="loader-animation"></div></div>
+  <header class="header">
+    <nav class="navbar navbar-dark">
+      <a class="navbar-brand" href="#">COVID-19 Dashboard</a>
+      <div class="credits"><img src="https://rs.school/images/rs_school_js.svg" alt="" class="logo-footer"> 2020, Tashkent</div>
+    </nav>
+	</header>
+  <div class="container-fluid" id="main">
+    <div class="row">
+      <div class="col left card" id="mainTable" data-tab-content>
+      </div>
+      <div class=" col-lg-6 col-md-6 col-sm middle my-active" id="map-and-chart" data-tab-content>
+          <div id="mapid"></div>
+          <div id="chart">
+						<canvas id="myChart">place for chart</canvas>
+					</div>
+      </div>
+      <div class="col right card" id="countryTable" data-tab-content>
+      </div>
+    </div>
+  </div>
+  <footer class="footer">
+    <div class="credits"><img src="https://rs.school/images/rs_school_js.svg" alt="" class="logo-footer"> 2020, Tashkent</div>
+    <div class="tabs"> 
+      <button type="button" class="btn btn-success tab my-active" data-tab-target="#map-and-chart">Map adn chart</button>
+      <button type="button" class="btn btn-success tab" data-tab-target="#mainTable">Main table</button>
+      <button type="button" class="btn btn-success tab" data-tab-target="#countryTable">Countries table</button>
+    </div>
+  </footer>
+
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+crossorigin=""></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+</body>
+
+</html>
